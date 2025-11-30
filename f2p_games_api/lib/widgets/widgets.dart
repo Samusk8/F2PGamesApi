@@ -1,0 +1,1 @@
+export 'package:f2p_games_api/widgets/card_swiper.dart';
