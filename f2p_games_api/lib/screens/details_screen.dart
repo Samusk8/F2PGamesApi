@@ -1,4 +1,5 @@
 import 'package:f2p_games_api/providers/games_provider.dart';
+import 'package:f2p_games_api/widgets/screenshot_swiper.dart';
 import 'package:f2p_games_api/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class DetailsScreen extends StatelessWidget {
               [
                 _PosterAndTitle(),
                 _Overview(),
-                CardSwiper(games: []),
+                ScreenshotSwiper(screenshots: gamesProvider.gameDetails!.screenshots),
               ]
             )
           )
@@ -41,6 +42,7 @@ class _CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Exactament igual que la AppBaer però amb bon comportament davant scroll
+    final gamesProvider = Provider.of<GamesProvider>(context);
     return SliverAppBar(
       backgroundColor: Colors.indigo,
       expandedHeight: 200,
@@ -55,13 +57,13 @@ class _CustomAppBar extends StatelessWidget {
           color: Colors.black12,
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            'Títol peli',
+            gamesProvider.gameDetails!.title,
             style: TextStyle(fontSize: 16),
           ),
         ),
         background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
-          image: NetworkImage('https://placehold.co/500x300/png'),
+          image: NetworkImage(gamesProvider.gameDetails!.thumbnail),
           fit: BoxFit.cover,
         ),
       ),
@@ -72,6 +74,8 @@ class _CustomAppBar extends StatelessWidget {
 class _PosterAndTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final gamesProvider = Provider.of<GamesProvider>(context);
+    final size = MediaQuery.of(context).size;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return Container(
       margin: const EdgeInsets.only(top: 20),
@@ -82,35 +86,40 @@ class _PosterAndTitle extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             child: FadeInImage(
               placeholder: AssetImage('assets/loading.gif'),
-              image: NetworkImage('https://placehold.co/200x300/png'),
+              image: NetworkImage(gamesProvider.gameDetails!.thumbnail,),
               height: 150,
+              width: size.width * 0.3,
+              fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(
-            width: 20,
+          SizedBox(
+            width: size.width * 0.05,
           ),
-          Column(
-            children: [
-              Text(
-                'Títol peli',
-                style: textTheme.headlineSmall,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              Text(
-                'Títol original',
-                style: textTheme.titleMedium,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-              Row(
-                children: [
-                  const Icon(Icons.star_outline, size: 15, color: Colors.grey),
-                  const SizedBox(width: 5),
-                  Text('Nota mitjana', style: textTheme.bodySmall),
-                ],
-              )
-            ],
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  gamesProvider.gameDetails!.title,
+                  style: textTheme.headlineSmall,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  
+                ),
+                Text(
+                  gamesProvider.gameDetails!.publisher,
+                  style: textTheme.titleMedium,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+                Row(
+                  children: [
+                    const Icon(Icons.star_outline, size: 15, color: Colors.grey),
+                    const SizedBox(width: 5),
+                    Text('Nota mitjana', style: textTheme.bodySmall, overflow: TextOverflow.ellipsis,),
+                  ],
+                )
+              ],
+            ),
           )
         ],
       ),

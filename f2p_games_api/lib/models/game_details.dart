@@ -31,7 +31,7 @@ class GameDetails {
         required this.developer,
         required this.releaseDate,
         required this.freetogameProfileUrl,
-        required this.minimumSystemRequirements,
+        //required this.minimumSystemRequirements,
         required this.screenshots,
     });
 
@@ -53,7 +53,7 @@ class GameDetails {
         developer: json["developer"],
         releaseDate: DateTime.parse(json["release_date"]),
         freetogameProfileUrl: json["freetogame_profile_url"],
-        minimumSystemRequirements: MinimumSystemRequirements.fromMap(json["minimum_system_requirements"]),
+        //minimumSystemRequirements: MinimumSystemRequirements.fromMap(json["minimum_system_requirements"]),
         screenshots: List<Screenshot>.from(json["screenshots"].map((x) => Screenshot.fromMap(x))),
     );
 
