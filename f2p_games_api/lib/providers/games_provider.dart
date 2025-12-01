@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:f2p_games_api/models/game_details.dart';
 import 'package:f2p_games_api/models/games_response.dart';
 import 'package:http/http.dart' as http;
 
@@ -10,11 +11,35 @@ class GamesProvider extends ChangeNotifier{
 
   List<GamesResponse> allGames = [];
   List<GamesResponse> categoryGames = [];
+  GameDetails gameDetails = GameDetails(
+    id: 0,
+    title: '',
+    thumbnail: '',
+    status: '',
+    shortDescription: '',
+    description: '',
+    gameUrl: '',
+    genre: '',
+    platform: '',
+    publisher: '',
+    developer: '',
+    releaseDate: DateTime.now(),
+    freetogameProfileUrl: '',
+    minimumSystemRequirements: MinimumSystemRequirements(
+      os: '',
+      processor: '',
+      memory: '',
+      graphics: '',
+      storage: ''
+    ),
+    screenshots: []
+  );
 
   GamesProvider(){
     print("Cargando juegos...");
     this.getAllGames();
     this.getCategoryGames('shooter');
+    getGameDetails(452);
   }
 
   getAllGames() async{
@@ -60,6 +85,26 @@ class GamesProvider extends ChangeNotifier{
     print(categoryGames.map((game) => game.title).toList());
 
     notifyListeners();
+  }
+
+  getGameDetails(int gameId) async{
+    print("detalles ");
+    var url = Uri.https(
+      'www.freetogame.com',
+      '/api/game',
+      {
+        'id': gameId.toString()
+      }
+    );
+    final result = await http.get(url);
+    if (result.statusCode == 200) {
+      final Map<String, dynamic> jsonMap = json.decode(result.body);
+      gameDetails = GameDetails.fromMap(jsonMap);
+      print("Detalles cargados");
+    } else {
+      throw Exception('error al cargar detalles del juego');
+
+    }
   }
   
 
