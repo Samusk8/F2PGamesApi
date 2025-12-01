@@ -3,7 +3,7 @@ import 'package:f2p_games_api/providers/games_provider.dart';
 import 'package:f2p_games_api/widgets/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:f2p_games_api/providers/categories.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
