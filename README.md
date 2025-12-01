@@ -65,8 +65,8 @@ Send us an email at contact@freetogame.com if you find any bugs.
 
 # ScreenShots
 
-<img width="421" height="850" alt="image" src="https://github.com/user-attachments/assets/1e16b897-1e51-426b-8af2-a413ee283133" />
-<img width="421" height="850" alt="image" src="https://github.com/user-attachments/assets/33ad4f8c-eea2-4e3a-8f45-349e10c7dbc6" />
+<img width="421" height="800" alt="image" src="https://github.com/user-attachments/assets/1e16b897-1e51-426b-8af2-a413ee283133" />
+<img width="421" height="800" alt="image" src="https://github.com/user-attachments/assets/33ad4f8c-eea2-4e3a-8f45-349e10c7dbc6" />
 
 
 
