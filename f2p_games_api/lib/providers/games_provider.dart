@@ -11,35 +11,13 @@ class GamesProvider extends ChangeNotifier{
 
   List<GamesResponse> allGames = [];
   List<GamesResponse> categoryGames = [];
-  GameDetails gameDetails = GameDetails(
-    id: 0,
-    title: '',
-    thumbnail: '',
-    status: '',
-    shortDescription: '',
-    description: '',
-    gameUrl: '',
-    genre: '',
-    platform: '',
-    publisher: '',
-    developer: '',
-    releaseDate: DateTime.now(),
-    freetogameProfileUrl: '',
-    minimumSystemRequirements: MinimumSystemRequirements(
-      os: '',
-      processor: '',
-      memory: '',
-      graphics: '',
-      storage: ''
-    ),
-    screenshots: []
-  );
+  GameDetails? gameDetails = null;
 
   GamesProvider(){
     print("Cargando juegos...");
     this.getAllGames();
     this.getCategoryGames('shooter');
-    getGameDetails(452);
+    //getGameDetails(452);
   }
 
   getAllGames() async{
@@ -105,6 +83,7 @@ class GamesProvider extends ChangeNotifier{
       throw Exception('error al cargar detalles del juego');
 
     }
+    notifyListeners();
   }
   
 

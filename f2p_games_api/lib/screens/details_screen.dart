@@ -9,10 +9,15 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final String game = ModalRoute.of(context)?.settings.arguments.toString() ?? 'no-game';
+    final int game = ModalRoute.of(context)?.settings.arguments as int;
     final gamesProvider = Provider.of<GamesProvider>(context);
+    gamesProvider.getGameDetails(game);
 
-    return Scaffold(
+    return gamesProvider.gameDetails == null
+    ? const Center(
+      child: CircularProgressIndicator(),
+    )
+    : Scaffold(
       body: CustomScrollView(
         slivers: [
           _CustomAppBar(),
@@ -120,7 +125,7 @@ class _Overview extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Text(
-        gamesProvider.gameDetails.description,
+        gamesProvider.gameDetails!.description,
         textAlign: TextAlign.justify,
         style: Theme.of(context).textTheme.titleMedium,
       ),

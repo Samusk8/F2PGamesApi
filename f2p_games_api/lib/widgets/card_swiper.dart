@@ -1,4 +1,5 @@
 import 'package:f2p_games_api/models/games_response.dart';
+import 'package:f2p_games_api/providers/games_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 
@@ -38,7 +39,7 @@ class CardSwiper extends StatelessWidget {
             final game = games[index];
             return GestureDetector(
               onTap: () => Navigator.pushNamed(context, 'details', 
-                  arguments: 'game details'),
+                  arguments: game.id),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(0),
                 child: FadeInImage(

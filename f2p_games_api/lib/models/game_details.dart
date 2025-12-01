@@ -14,7 +14,7 @@ class GameDetails {
     String developer;
     DateTime releaseDate;
     String freetogameProfileUrl;
-    MinimumSystemRequirements minimumSystemRequirements;
+    MinimumSystemRequirements? minimumSystemRequirements;
     List<Screenshot> screenshots;
 
     GameDetails({
@@ -71,7 +71,7 @@ class GameDetails {
         "developer": developer,
         "release_date": "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
         "freetogame_profile_url": freetogameProfileUrl,
-        "minimum_system_requirements": minimumSystemRequirements.toMap(),
+        "minimum_system_requirements": minimumSystemRequirements?.toMap(),
         "screenshots": List<dynamic>.from(screenshots.map((x) => x.toMap())),
     };
 }
