@@ -10,12 +10,14 @@ class GamesProvider extends ChangeNotifier{
 
   List<GamesResponse> allGames = [];
   List<GamesResponse> categoryGames = [];
+  List<GamesResponse> platformGames = [];
   GameDetails? gameDetails = null;
 
   GamesProvider(){
     print("Cargando juegos...");
     this.getAllGames();
     this.getCategoryGames('shooter');
+    this.getPlatformGames('pc');
     //getGameDetails(452);
   }
 
@@ -52,6 +54,31 @@ class GamesProvider extends ChangeNotifier{
     if (result.statusCode == 200) {
       final List jsonList = json.decode(result.body);
       categoryGames = jsonList.map((json) => GamesResponse.fromMap(json)).toList();
+      print("Juegos cargados");
+    } else {
+      throw Exception('Failed to load games');
+
+    }
+    /*final categoryGamesResponse = GamesResponse.fromJson(result.body);
+    categoryGames = categoryGamesResponse.results;*/
+    print(categoryGames.map((game) => game.title).toList());
+
+    notifyListeners();
+  }
+  getPlatformGames(platformName) async{
+    print("Juegos por categoria");
+    var url = Uri.https(
+      'www.freetogame.com',
+      '/api/games',
+      {
+        'platform': platformName
+      }
+    );
+    print(url.toString());
+    final result = await http.get(url);
+    if (result.statusCode == 200) {
+      final List jsonList = json.decode(result.body);
+      platformGames = jsonList.map((json) => GamesResponse.fromMap(json)).toList();
       print("Juegos cargados");
     } else {
       throw Exception('Failed to load games');

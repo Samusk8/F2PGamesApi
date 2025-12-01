@@ -1,5 +1,6 @@
 import 'package:f2p_games_api/providers/categories_provider.dart';
 import 'package:f2p_games_api/providers/games_provider.dart';
+import 'package:f2p_games_api/providers/platforms_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
@@ -16,6 +17,11 @@ class HomeScreen extends StatelessWidget {
 
     final selectedCategory = categoriesProvider.getSelectedCategory;
     final categories = categoriesProvider.getCategories;
+
+    final platformsProvider = context.watch<PlatformsProvider>();
+
+    final selectedPlatform = platformsProvider.getSelectedPlatform;
+    final platforms = platformsProvider.getPlatforms;
     //final games = gamesProvider.games;
     
     
@@ -36,7 +42,7 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-              Text('Categories',),
+              Text('Categories:',),
 
               DropdownButton<String>(
                 value: selectedCategory,
@@ -57,24 +63,24 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-              Text('Categories',),
+              Text('Platform:',),
 
               DropdownButton<String>(
-                value: selectedCategory,
-                items: categories.map((cat) {
+                value: selectedPlatform,
+                items: platforms.map((cat) {
                   return DropdownMenuItem(
                     value: cat,
                     child: Text(cat),
                   );
                 }).toList(),
                 onChanged: (value) {
-                  context.read<CategoriesProvider>().setSelectedCategory(value!);
-                  gamesProvider.getCategoryGames(value);
+                  context.read<PlatformsProvider>().setSelectedPlatform(value!);
+                  gamesProvider.getPlatformGames(value);
                 },
               )
                 ],
               ),
-              StackSwiper(games: gamesProvider.categoryGames),
+              StackSwiper(games: gamesProvider.platformGames),
               
               
 
