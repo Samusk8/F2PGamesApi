@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
               )
                 ],
               ),
-              CardSwiper(games: gamesProvider.categoryGames),
+              StackSwiper(games: gamesProvider.categoryGames),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
               )
                 ],
               ),
-              CardSwiper(games: gamesProvider.categoryGames),
+              StackSwiper(games: gamesProvider.categoryGames),
               
               
 
