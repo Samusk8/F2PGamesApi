@@ -1,9 +1,10 @@
+import 'package:f2p_games_api/models/games_response.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 
 class CardSwiper extends StatelessWidget {
   
-  final List<dynamic> games;
+  final List<GamesResponse> games;
   
   const CardSwiper({super.key, required this.games});
 
@@ -26,22 +27,23 @@ class CardSwiper extends StatelessWidget {
      return Container(
         width: double.infinity,
         // Aquest multiplicador estableix el tant per cent de pantalla ocupada 50%
-        height: size.height * 0.5,
+        height: size.height * 0.3,
         // color: Colors.red,
         child: Swiper(
-          itemCount: 10,
-          layout: SwiperLayout.STACK,
+          itemCount: games.length,
+          layout: SwiperLayout.DEFAULT,
           itemWidth: size.width * 0.6,
           itemHeight: size.height * 0.4,
           itemBuilder: (BuildContext context, int index) {
+            final game = games[index];
             return GestureDetector(
               onTap: () => Navigator.pushNamed(context, 'details',
                   arguments: 'game details'),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(0),
                 child: FadeInImage(
                     placeholder: AssetImage('assets/no-image.jpg'),
-                    image: NetworkImage('https://placehold.co/300x400/png'),
+                    image: NetworkImage(game.thumbnail),
                     fit: BoxFit.cover),
               ),
             );

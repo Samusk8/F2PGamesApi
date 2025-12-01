@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     final selectedCategory = categoriesProvider.getSelectedCategory;
     final categories = categoriesProvider.getCategories;
     //final games = gamesProvider.games;
-    final games = [1,2,3,4,5];
+    
     
     
     return Scaffold(
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              CardSwiper(games: games),
+              CardSwiper(games: gamesProvider.allGames),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
