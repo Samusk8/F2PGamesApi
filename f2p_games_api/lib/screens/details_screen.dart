@@ -43,18 +43,32 @@ class DetailsScreen extends StatelessWidget {
                   _PosterAndTitle(),
                   _Overview(),
                   //Text('Url: '+ gamesProvider.gameDetails!.gameUrl, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center,),
-                  Link(
-                    uri: Uri.parse(gamesProvider.gameDetails!.gameUrl),
-                    target: LinkTarget.blank,
-                    builder: (context, followLink) => GestureDetector(
-                    onTap: followLink,
-                      child: Text(
-                        gamesProvider.gameDetails!.gameUrl,
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline,
+                  Center(
+                    child: Column(
+                      children: [
+                        Text('Play Now:', style: Theme.of(context).textTheme.headlineSmall),
+                        Padding(
+                            padding: const EdgeInsets.only(top: 5, bottom: 15),
                         ),
-                      ),
+                        Link(
+                          uri: Uri.parse(gamesProvider.gameDetails!.gameUrl),
+                          target: LinkTarget.blank,
+                          builder: (context, followLink) => GestureDetector(
+                          onTap: followLink,
+                            child: Text(
+                              gamesProvider.gameDetails!.gameUrl,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Colors.blue,
+                                    decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Padding(
+                            padding: const EdgeInsets.only(top: 5, bottom: 15),
+                        ),
+                      ],
                     ),
                   ),
                   ScreenshotSwiper(screenshots: gamesProvider.gameDetails!.screenshots),
