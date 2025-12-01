@@ -48,11 +48,35 @@ class HomeScreen extends StatelessWidget {
                 }).toList(),
                 onChanged: (value) {
                   context.read<CategoriesProvider>().setSelectedCategory(value!);
+                  gamesProvider.getCategoryGames(value);
                 },
               )
                 ],
               ),
+              CardSwiper(games: gamesProvider.categoryGames),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+              Text('Categories',),
 
+              DropdownButton<String>(
+                value: selectedCategory,
+                items: categories.map((cat) {
+                  return DropdownMenuItem(
+                    value: cat,
+                    child: Text(cat),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  context.read<CategoriesProvider>().setSelectedCategory(value!);
+                  gamesProvider.getCategoryGames(value);
+                },
+              )
+                ],
+              ),
+              CardSwiper(games: gamesProvider.categoryGames),
+              
+              
 
             ],
           ),
