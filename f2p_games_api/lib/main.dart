@@ -1,3 +1,4 @@
+import 'package:f2p_games_api/providers/categories_provider.dart';
 import 'package:f2p_games_api/providers/games_provider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class AppState extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => GamesProvider(), lazy: false,),
+        ChangeNotifierProvider(create: (_)=> CategoriesProvider(), lazy: false,)
       ],
       child: MyApp(),
     );

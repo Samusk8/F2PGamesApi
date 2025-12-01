@@ -1,3 +1,4 @@
+import 'package:f2p_games_api/providers/categories_provider.dart';
 import 'package:f2p_games_api/providers/games_provider.dart';
 import 'package:f2p_games_api/widgets/card_swiper.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final moviesProvider = Provider.of<GamesProvider>(context);
-    //final games = moviesProvider.games;
+    final gamesProvider = Provider.of<GamesProvider>(context);
+    final categoriesProvider = context.watch<CategoriesProvider>();
+
+    final selectedCategory = categoriesProvider.getSelectedCategory;
+    final categories = categoriesProvider.getCategories;
+    //final games = gamesProvider.games;
     final games = [1,2,3,4,5];
-    String selectedCategory = 'shooter';
+    
     
     return Scaffold(
       appBar: AppBar(
@@ -42,9 +47,7 @@ class HomeScreen extends StatelessWidget {
                   );
                 }).toList(),
                 onChanged: (value) {
-                  /*ChangeNotifier(() {
-                    selectedCategory = value!;
-                  });*/
+                  context.read<CategoriesProvider>().setSelectedCategory(value!);
                 },
               )
                 ],
