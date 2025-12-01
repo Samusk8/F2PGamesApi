@@ -28,13 +28,14 @@ class HomeScreen extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Home', style: TextStyle(color: Colors.white),),
         actions: [
            Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.account_circle_rounded,
               size: 30,
+              color: Colors.white,
             ),
           ),
         ],
@@ -71,47 +72,79 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               CardSwiper(games: gamesProvider.allGames),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-              Text('Categories:',),
+              Container(
+                decoration: BoxDecoration(
 
-              DropdownButton<String>(
-                value: selectedCategory,
-                items: categories.map((cat) {
-                  return DropdownMenuItem(
-                    value: cat,
-                    child: Text(cat),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  context.read<CategoriesProvider>().setSelectedCategory(value!);
-                  gamesProvider.getCategoryGames(value);
-                },
-              )
-                ],
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 30, 31, 31), 
+                      Color.fromARGB(255, 64, 67, 67), 
+                      Color.fromARGB(255, 85, 91, 91), 
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ) ,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                Text('Categories:',style: TextStyle(color: Colors.white),),
+                
+                DropdownButton<String>(
+                  value: selectedCategory,
+                  items: categories.map((cat) {
+                    return DropdownMenuItem(
+                      value: cat,
+                      child: Text(cat),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    context.read<CategoriesProvider>().setSelectedCategory(value!);
+                    gamesProvider.getCategoryGames(value);
+                  },
+                )
+                  ],
+                ),
               ),
+              Padding(padding:  EdgeInsets.only(top: 20)),
               StackSwiper(games: gamesProvider.categoryGames),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-              Text('Platform:',),
+              Padding(padding:  EdgeInsets.only(top: 20)),
+              Container(
+                decoration: BoxDecoration(
 
-              DropdownButton<String>(
-                value: selectedPlatform,
-                items: platforms.map((cat) {
-                  return DropdownMenuItem(
-                    value: cat,
-                    child: Text(cat),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  context.read<PlatformsProvider>().setSelectedPlatform(value!);
-                  gamesProvider.getPlatformGames(value);
-                },
-              )
-                ],
+                  gradient: LinearGradient(
+                    colors: [
+                      Color.fromARGB(255, 30, 31, 31), 
+                      Color.fromARGB(255, 64, 67, 67), 
+                      Color.fromARGB(255, 85, 91, 91), 
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ) ,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                Text('Platform:', style: TextStyle(color: Colors.white,),),
+                
+                DropdownButton<String>(
+                  
+                  value: selectedPlatform,
+                  items: platforms.map((cat) {
+                    return DropdownMenuItem(
+                      value: cat,
+                      child: Text(cat),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    context.read<PlatformsProvider>().setSelectedPlatform(value!);
+                    gamesProvider.getPlatformGames(value);
+                  },
+                )
+                  ],
+                ),
               ),
+              Padding(padding:  EdgeInsets.only(top: 20)),
               StackSwiper(games: gamesProvider.platformGames),
               
               
