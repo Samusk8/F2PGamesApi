@@ -2,6 +2,7 @@ import 'package:f2p_games_api/providers/games_provider.dart';
 import 'package:f2p_games_api/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/link.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
@@ -26,7 +27,21 @@ class DetailsScreen extends StatelessWidget {
               [
                 _PosterAndTitle(),
                 _Overview(),
-                Text('Url: '+ gamesProvider.gameDetails!.gameUrl, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center,),
+                //Text('Url: '+ gamesProvider.gameDetails!.gameUrl, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center,),
+                Link(
+                  uri: Uri.parse(gamesProvider.gameDetails!.gameUrl),
+                  target: LinkTarget.blank,
+                  builder: (context, followLink) => GestureDetector(
+                  onTap: followLink,
+                    child: Text(
+                      gamesProvider.gameDetails!.gameUrl,
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ),
+                ),
                 ScreenshotSwiper(screenshots: gamesProvider.gameDetails!.screenshots),
               ]
             )
@@ -107,13 +122,16 @@ class _PosterAndTitle extends StatelessWidget {
                   
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const Icon(Icons.verified_user, size: 15, color: Colors.grey),
-                    Text(
-                      gamesProvider.gameDetails!.publisher,
-                      style: textTheme.titleMedium,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
+                    Expanded(
+                      child: Text(
+                        gamesProvider.gameDetails!.publisher,
+                        style: textTheme.titleMedium,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      ),
                     ),
                   
                   ]
