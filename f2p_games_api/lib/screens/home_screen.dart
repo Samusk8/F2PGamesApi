@@ -28,13 +28,45 @@ class HomeScreen extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: Text('Home'),
+        actions: [
+           Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Icon(
+              Icons.account_circle_rounded,
+              size: 30,
+            ),
+          ),
+        ],
+        elevation: 2,
+        animateColor: true,
+        flexibleSpace: AnimatedContainer(
+          duration: Duration(seconds: 3),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Color.fromARGB(255, 90, 93, 93), 
+                Color.fromARGB(255, 58, 60, 60), 
+                Color.fromARGB(255, 53, 54, 54), 
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
+
       body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromARGB(255, 118, 122, 123), 
+                Color.fromARGB(255, 66, 67, 67), 
+              ],
+            ),
           ),
           child: Column(
             children: [

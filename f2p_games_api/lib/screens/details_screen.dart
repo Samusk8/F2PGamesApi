@@ -16,37 +16,53 @@ class DetailsScreen extends StatelessWidget {
 
     return gamesProvider.gameDetails == null
     ? const Center(
+      
       child: CircularProgressIndicator(),
     )
     : Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          _CustomAppBar(),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                _PosterAndTitle(),
-                _Overview(),
-                //Text('Url: '+ gamesProvider.gameDetails!.gameUrl, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center,),
-                Link(
-                  uri: Uri.parse(gamesProvider.gameDetails!.gameUrl),
-                  target: LinkTarget.blank,
-                  builder: (context, followLink) => GestureDetector(
-                  onTap: followLink,
-                    child: Text(
-                      gamesProvider.gameDetails!.gameUrl,
-                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: Colors.blue,
-                            decoration: TextDecoration.underline,
+      
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromARGB(255, 118, 122, 123), 
+                Color.fromARGB(255, 91, 93, 94), 
+              ],
+            ),
+          ),
+        child: CustomScrollView(
+          
+          slivers: [
+            
+            _CustomAppBar(),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  _PosterAndTitle(),
+                  _Overview(),
+                  //Text('Url: '+ gamesProvider.gameDetails!.gameUrl, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center,),
+                  Link(
+                    uri: Uri.parse(gamesProvider.gameDetails!.gameUrl),
+                    target: LinkTarget.blank,
+                    builder: (context, followLink) => GestureDetector(
+                    onTap: followLink,
+                      child: Text(
+                        gamesProvider.gameDetails!.gameUrl,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline,
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ScreenshotSwiper(screenshots: gamesProvider.gameDetails!.screenshots),
-              ]
+                  ScreenshotSwiper(screenshots: gamesProvider.gameDetails!.screenshots),
+                ]
+              )
             )
-          )
-        ]
+          ]
+        ),
       ),
     );
   }
