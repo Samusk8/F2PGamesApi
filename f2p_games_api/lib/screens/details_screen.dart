@@ -26,6 +26,7 @@ class DetailsScreen extends StatelessWidget {
               [
                 _PosterAndTitle(),
                 _Overview(),
+                Text('Url: '+ gamesProvider.gameDetails!.gameUrl, style: Theme.of(context).textTheme.bodySmall, textAlign: TextAlign.center,),
                 ScreenshotSwiper(screenshots: gamesProvider.gameDetails!.screenshots),
               ]
             )
@@ -96,6 +97,7 @@ class _PosterAndTitle extends StatelessWidget {
           ),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   gamesProvider.gameDetails!.title,
@@ -104,19 +106,26 @@ class _PosterAndTitle extends StatelessWidget {
                   maxLines: 2,
                   
                 ),
-                Text(
-                  gamesProvider.gameDetails!.publisher,
-                  style: textTheme.titleMedium,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+                Row(
+                  children: [
+                    const Icon(Icons.verified_user, size: 15, color: Colors.grey),
+                    Text(
+                      gamesProvider.gameDetails!.publisher,
+                      style: textTheme.titleMedium,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    ),
+                  
+                  ]
                 ),
                 Row(
                   children: [
-                    const Icon(Icons.star_outline, size: 15, color: Colors.grey),
+                    //const Icon(Icons.air_sharp, size: 15, color: Colors.grey),
                     const SizedBox(width: 5),
-                    Text('Nota mitjana', style: textTheme.bodySmall, overflow: TextOverflow.ellipsis,),
+                    Text('Categoria: '+ gamesProvider.gameDetails!.genre, style: textTheme.bodySmall, overflow: TextOverflow.ellipsis,),
                   ],
-                )
+                ),
+                //Text('Plataforma: '+ gamesProvider.gameDetails!.platform, style: textTheme.bodySmall, overflow: TextOverflow.ellipsis,),
               ],
             ),
           )
