@@ -1,8 +1,8 @@
 import 'package:f2p_games_api/providers/categories_provider.dart';
 import 'package:f2p_games_api/providers/games_provider.dart';
-import 'package:f2p_games_api/widgets/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../widgets/widgets.dart';
 
 
 class HomeScreen extends StatelessWidget {

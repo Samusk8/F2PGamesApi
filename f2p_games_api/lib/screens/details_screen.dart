@@ -1,5 +1,4 @@
 import 'package:f2p_games_api/providers/games_provider.dart';
-import 'package:f2p_games_api/widgets/screenshot_swiper.dart';
 import 'package:f2p_games_api/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

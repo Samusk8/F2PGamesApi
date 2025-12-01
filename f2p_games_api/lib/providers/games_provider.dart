@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'package:f2p_games_api/models/game_details.dart';
-import 'package:f2p_games_api/models/games_response.dart';
+import 'package:f2p_games_api/models/models.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';

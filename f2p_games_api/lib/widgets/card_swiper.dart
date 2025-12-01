@@ -1,5 +1,4 @@
-import 'package:f2p_games_api/models/games_response.dart';
-import 'package:f2p_games_api/providers/games_provider.dart';
+import 'package:f2p_games_api/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 
